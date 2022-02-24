@@ -1,0 +1,1 @@
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date,'1',2,'test' )
