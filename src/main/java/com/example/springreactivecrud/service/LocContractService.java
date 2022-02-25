@@ -23,6 +23,6 @@ public class LocContractService {
     }
     public Mono<Void> deleteById(Long id){ return  locContractRepository.deleteById(id);}
    public Flux<LocContract> getFirst10Id(){
-        return locContractRepository.findByIdLessThanEqual();
+        return locContractRepository.findFirst10();
    }
 }

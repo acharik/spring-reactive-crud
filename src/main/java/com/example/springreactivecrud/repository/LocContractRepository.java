@@ -11,6 +11,6 @@ import reactor.core.publisher.Mono;
 public interface LocContractRepository extends ReactiveCrudRepository<LocContract,Long> {
     Flux<LocContract> getById(Long id);
 
-    @Query("SELECT * from loc_contract l where l.id <= 10 ")
-     Flux<LocContract> findByIdLessThanEqual ();
+        @Query("SELECT * from loc_contract LIMIT 10 ")
+        Flux<LocContract> findFirst10();
 }
