@@ -1,1 +1,12 @@
-INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date,'1',2,'test' )
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'1',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'2',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'3',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'4',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'5',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'6',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'7',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'8',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'9',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'10',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'11',2,'test' );
+INSERT INTO loc_contract(date_begin,date_end, num_contract, sum, comment) values (current_date,current_date+2,'12',2,'test' )
