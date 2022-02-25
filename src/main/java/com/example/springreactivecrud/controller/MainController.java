@@ -35,8 +35,8 @@ public class MainController {
     }
 
     @PutMapping("/{id}")
-    Mono<LocContract> updateLocContract(@RequestBody LocContract locContract){
-
+    Mono<LocContract> updateLocContract(@RequestBody LocContract locContract, @PathVariable("id") Long id){
+        locContract.setId(id);
         return locContractService.saveLocContract(locContract);
     }
     @GetMapping("/first10")
