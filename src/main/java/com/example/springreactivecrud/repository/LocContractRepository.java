@@ -12,5 +12,5 @@ public interface LocContractRepository extends ReactiveCrudRepository<LocContrac
     Flux<LocContract> getById(Long id);
 
     @Query("SELECT * from loc_contract l where l.id <= 10 ")
-    public Flux<LocContract> findByIdLessThanEqual ();
+     Flux<LocContract> findByIdLessThanEqual ();
 }

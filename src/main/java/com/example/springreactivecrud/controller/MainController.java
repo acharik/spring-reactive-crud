@@ -9,8 +9,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-@RestController("/contract")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/contract")
 public class MainController {
 
     private final LocContractService locContractService;
