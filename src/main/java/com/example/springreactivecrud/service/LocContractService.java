@@ -30,4 +30,5 @@ public class LocContractService {
     public Flux<LocContract> getLocContractAfterRequiredDate(LocalDate requiredDate){
         return locContractRepository.findByDateBeginAfter(requiredDate);
     }
+    public Mono<LocContract> getContractByNum(String num){return locContractRepository.findByNumContract(num);}
 }

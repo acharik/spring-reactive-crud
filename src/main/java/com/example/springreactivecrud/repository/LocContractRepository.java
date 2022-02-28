@@ -16,4 +16,5 @@ public interface LocContractRepository extends ReactiveCrudRepository<LocContrac
         @Query("SELECT * from loc_contract LIMIT 10 ")
         Flux<LocContract> findFirst10();
         Flux<LocContract> findByDateBeginAfter(LocalDate date);
+        Mono<LocContract> findByNumContract(String num);
 }

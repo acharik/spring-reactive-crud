@@ -54,7 +54,10 @@ public class MainController {
                                                                           LocalDate date){
         return locContractService.getLocContractAfterRequiredDate(date);
     }
-
+    @GetMapping("/numFilter")
+    public Mono<LocContract> getContractByNumber(@RequestParam String num){
+        return locContractService.getContractByNum(num);
+    }
 }
 
 
