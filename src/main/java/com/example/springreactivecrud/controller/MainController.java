@@ -14,17 +14,12 @@ import java.time.LocalDate;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/contract")
+@RequestMapping("spring-reactive-crud/v1/loc_contract")
 public class MainController {
 
     private final LocContractService locContractService;
 
-    @GetMapping("/all")
-    public Flux<LocContract> getCatalogueItemsStream() {
-        return locContractService
-                .getAll();
-    }
-    @PostMapping("/add")
+    @PostMapping()
     public Mono<LocContract> add ( @RequestBody LocContract locContract){
         return locContractService.saveLocContract(locContract);
     }
@@ -43,20 +38,16 @@ public class MainController {
         locContract.setId(id);
         return locContractService.saveLocContract(locContract);
     }
-    @GetMapping("/first10")
-    public Flux<LocContract> getFirst10(){
-        return locContractService.getFirst10Id();
-    }
 
-    @GetMapping("/dateFilter")
-    public Flux<LocContract> getLocContractAfterRequiredDate(@RequestParam
-                                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                                                          LocalDate date){
-        return locContractService.getLocContractAfterRequiredDate(date);
-    }
-    @GetMapping("/numFilter")
+    @GetMapping(params = "num")
     public Mono<LocContract> getContractByNumber(@RequestParam String num){
         return locContractService.getContractByNum(num);
+    }
+    @GetMapping()
+    public Flux<LocContract> getContract(@RequestParam(required = false)
+                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                          @RequestParam(required = false) Long count){
+        return locContractService.getContract(date,count);
     }
 }
 

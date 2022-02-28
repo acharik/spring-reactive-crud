@@ -14,9 +14,6 @@ import java.time.LocalDate;
 public class LocContractService {
     private final LocContractRepository locContractRepository;
 
-    public Flux<LocContract> getAll() {
-        return locContractRepository.findAll();
-    }
         public Mono<LocContract> saveLocContract(LocContract locContract){
             return locContractRepository.save(locContract);
         }
@@ -24,11 +21,14 @@ public class LocContractService {
         return locContractRepository.getById(id);
     }
     public Mono<Void> deleteById(Long id){ return  locContractRepository.deleteById(id);}
-    public Flux<LocContract> getFirst10Id(){
-        return locContractRepository.findFirst10();
-   }
-    public Flux<LocContract> getLocContractAfterRequiredDate(LocalDate requiredDate){
-        return locContractRepository.findByDateBeginAfter(requiredDate);
-    }
     public Mono<LocContract> getContractByNum(String num){return locContractRepository.findByNumContract(num);}
+    public Flux<LocContract> getContract(LocalDate date, Long count){
+        if(date == null){
+            return locContractRepository.findFirstNContract(count);
+        }
+        if(count == null){
+            return locContractRepository.findByDateBeginAfter(date);
+        }
+        return locContractRepository.findFirstNContractAndAfterRequiredDate(date,count);
+    }
 }

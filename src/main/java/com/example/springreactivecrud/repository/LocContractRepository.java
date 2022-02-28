@@ -13,8 +13,10 @@ import java.time.LocalDate;
 public interface LocContractRepository extends ReactiveCrudRepository<LocContract,Long> {
     Flux<LocContract> getById(Long id);
 
-        @Query("SELECT * from loc_contract LIMIT 10 ")
-        Flux<LocContract> findFirst10();
+        @Query("SELECT * from loc_contract LIMIT $1 ")
+        Flux<LocContract> findFirstNContract(Long count);
         Flux<LocContract> findByDateBeginAfter(LocalDate date);
+        @Query("SELECT * FROM loc_contract  WHERE date_begin >=$1 LIMIT $2 ")
+        Flux<LocContract> findFirstNContractAndAfterRequiredDate(LocalDate date, Long count);
         Mono<LocContract> findByNumContract(String num);
 }
