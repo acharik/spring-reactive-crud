@@ -10,6 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -21,10 +22,10 @@ public class LocContract {
     private Long id;
     @Column("date_begin")
     @NonNull
-    private Instant dateBegin;
+    private LocalDate dateBegin;
     @Column("date_end")
     @NonNull
-    private Instant dateEnd;
+    private LocalDate dateEnd;
     @Column("num_contract")
     @NonNull
     private String numContract;

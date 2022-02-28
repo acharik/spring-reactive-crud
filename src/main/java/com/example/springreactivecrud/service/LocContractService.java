@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 public class LocContractService {
@@ -22,7 +24,10 @@ public class LocContractService {
         return locContractRepository.getById(id);
     }
     public Mono<Void> deleteById(Long id){ return  locContractRepository.deleteById(id);}
-   public Flux<LocContract> getFirst10Id(){
+    public Flux<LocContract> getFirst10Id(){
         return locContractRepository.findFirst10();
    }
+    public Flux<LocContract> getLocContractAfterRequiredDate(LocalDate requiredDate){
+        return locContractRepository.findByDateBeginAfter(requiredDate);
+    }
 }

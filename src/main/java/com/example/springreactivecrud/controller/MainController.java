@@ -4,9 +4,12 @@ import com.example.springreactivecrud.entity.LocContract;
 import com.example.springreactivecrud.service.LocContractService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
 
 @Slf4j
 @RestController
@@ -45,7 +48,12 @@ public class MainController {
         return locContractService.getFirst10Id();
     }
 
-
+    @GetMapping(value = "/all",params = "date")
+    public Flux<LocContract> getLocContractAfterRequiredDate(@RequestParam
+                                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                                          LocalDate date){
+        return locContractService.getLocContractAfterRequiredDate(date);
+    }
 
 }
 
