@@ -48,7 +48,7 @@ public class MainController {
         return locContractService.getFirst10Id();
     }
 
-    @GetMapping(value = "/all",params = "date")
+    @GetMapping("/dateFilter")
     public Flux<LocContract> getLocContractAfterRequiredDate(@RequestParam
                                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                           LocalDate date){
