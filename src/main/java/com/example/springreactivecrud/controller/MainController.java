@@ -20,11 +20,12 @@ public class MainController {
     private final LocContractService locContractService;
 
     @PostMapping()
-    public Mono<LocContract> add ( @RequestBody LocContract locContract){
-        return locContractService.saveLocContract(locContract);
+    public Mono<LocContract> add ( @RequestBody LocContract locContract)  {
+
+            return locContractService.saveLocContract(locContract);
     }
     @GetMapping("/{id}")
-    public Flux<LocContract> getById( @PathVariable("id") Long id){
+    public Flux<LocContract> getById(@PathVariable("id") Long id)  {
 
         return locContractService.getById(id);}
     @DeleteMapping("/{id}")
@@ -50,5 +51,9 @@ public class MainController {
         return locContractService.getContract(date,count);
     }
 }
+
+
+
+
 
 

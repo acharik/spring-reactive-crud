@@ -7,20 +7,22 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 public class LocContractService {
     private final LocContractRepository locContractRepository;
-
         public Mono<LocContract> saveLocContract(LocContract locContract){
             return locContractRepository.save(locContract);
         }
-    public Flux<LocContract> getById(Long id){
-        return locContractRepository.getById(id);
+    public Flux<LocContract> getById(Long id) {
+
+        return locContractRepository.getById(id).switchIfEmpty(Mono.error(new NoSuchElementException("Запись не найдена")));
     }
-    public Mono<Void> deleteById(Long id){ return  locContractRepository.deleteById(id);}
+    public Mono<Void> deleteById(Long id){ return  locContractRepository.deleteById(id).switchIfEmpty(Mono.error(new NoSuchElementException("невозможно удалить так как записи не существует")));}
     public Mono<LocContract> getContractByNum(String num){return locContractRepository.findByNumContract(num);}
     public Flux<LocContract> getContract(LocalDate date, Long count){
         if(date == null){

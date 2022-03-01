@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import javax.validation.Constraint;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -24,16 +25,16 @@ public class LocContract {
     @NonNull
     private LocalDate dateBegin;
     @Column("date_end")
-    @NonNull
+
     private LocalDate dateEnd;
     @Column("num_contract")
     @NonNull
     private String numContract;
     @Column("sum")
-    @NonNull
+
     private BigDecimal sum;
     @Column("comment")
-    @NonNull
+
     private String comment;
 
 
