@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.support.WebExchangeBindException;
 
 import java.util.NoSuchElementException;
 
@@ -18,9 +19,16 @@ public class ExceptionAdvice {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Контракт с таким номером уже существует");
     }
-       else {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+       if(ex.getMessage().contains("DATE_BEGIN_CHECK"))  {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Дата начала должна быть в пределах от 1950 до 2100 года");
        }
+       if(ex.getMessage().contains("DATE_END_CHECK"))  {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Дата конца должна быть в пределах от 1950 до 2100 года");
+       }
+       if(ex.getMessage().contains("DATE_CHECK"))  {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Дата конца должна быть позже даты начала");
+       }
+       else  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
     @ExceptionHandler
     public ResponseEntity<String> handleNotFoundContractEx(NoSuchElementException ex) {
@@ -33,6 +41,11 @@ public class ExceptionAdvice {
        }else
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Проверьте правильность введенных данных");
     }
-
+    @ExceptionHandler ResponseEntity<String> handleWebExchangeBindEx(WebExchangeBindException ex){
+       if (ex.getMessage().contains("Неверный формат")){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("неверный формат");
+       }
+       else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 
 }

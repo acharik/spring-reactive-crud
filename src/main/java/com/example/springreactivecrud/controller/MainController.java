@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -22,7 +23,7 @@ public class MainController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<LocContract> add ( @RequestBody LocContract locContract)  {
+    public Mono<LocContract> add ( @Validated @RequestBody LocContract locContract)  {
 
             return locContractService.saveLocContract(locContract);
     }
@@ -40,7 +41,7 @@ public class MainController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Mono<LocContract> updateLocContract(@RequestBody LocContract locContract, @PathVariable("id") Long id){
+    Mono<LocContract> updateLocContract( @Validated @RequestBody LocContract locContract, @PathVariable("id") Long id){
         locContract.setId(id);
         return locContractService.saveLocContract(locContract);
     }
