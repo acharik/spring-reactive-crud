@@ -1,5 +1,6 @@
 package com.example.springreactivecrud.exсeptions;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import io.r2dbc.spi.R2dbcDataIntegrityViolationException;
 import org.springframework.core.codec.DecodingException;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.NoSuchElementException;
 public class ExceptionAdvice {
    @ExceptionHandler
     public ResponseEntity<String> handleR2dbcEx (R2dbcDataIntegrityViolationException ex){
-       if(ex.getMessage().substring(0,21).equals("Нарушение уникального")){
+       if(ex.getMessage().contains("Нарушение уникального")){
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Контракт с таким номером уже существует");
     }
@@ -26,8 +27,12 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
     @ExceptionHandler
-    public ResponseEntity<String> handleNonNullEx(DecodingException ex){
-       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Обязательные поля должны быть заполнены");
+    public ResponseEntity<String> handleDecodingEx(DecodingException ex){
+       if (ex.getMessage().contains(" numContract is marked non-null but is null")){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Обязательные поля должны быть заполнены");
+       }else
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Проверьте правильность введенных данных");
     }
+
 
 }

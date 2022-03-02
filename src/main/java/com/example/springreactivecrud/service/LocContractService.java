@@ -26,11 +26,11 @@ public class LocContractService {
     public Mono<LocContract> getContractByNum(String num){return locContractRepository.findByNumContract(num);}
     public Flux<LocContract> getContract(LocalDate date, Long count){
         if(date == null){
-            return locContractRepository.findFirstNContract(count);
+            return locContractRepository.findFirstNContract(count).switchIfEmpty(Mono.error(new NoSuchElementException("Запись не найдена")));
         }
         if(count == null){
-            return locContractRepository.findByDateBeginAfter(date);
+            return locContractRepository.findByDateBeginAfter(date).switchIfEmpty(Mono.error(new NoSuchElementException("Запись не найдена")));
         }
-        return locContractRepository.findFirstNContractAndAfterRequiredDate(date,count);
+        return locContractRepository.findFirstNContractAndAfterRequiredDate(date,count).switchIfEmpty(Mono.error(new NoSuchElementException("Запись не найдена")));
     }
 }
